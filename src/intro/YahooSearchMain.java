@@ -15,6 +15,8 @@ public class YahooSearchMain {
 
 	public static void main(String[] args) {
 		//INICIALIZACION DE SYSTEM.SETPROPERTY()
+        System.setProperty("webdriver.chrome.driver", "C:\\test_automation\\drivers\\chromedriver.exe");
+		
 	    WebDriver driver;
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30,  TimeUnit.SECONDS);
