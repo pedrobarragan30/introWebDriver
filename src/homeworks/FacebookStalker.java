@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FacebookStalker {
 	static WebDriver driver;
@@ -37,8 +39,8 @@ public class FacebookStalker {
 	}
 
 	private static void Login() {
-		String user = "";
-		String pswd = "";
+		String user = "pbaro30@hotmail.com";
+		String pswd = "HIPh17h0044a!";
 		
 		WebElement userField = driver.findElement(By.id("email"));
 		WebElement pswdField = driver.findElement(By.id("pass"));
@@ -62,47 +64,44 @@ public class FacebookStalker {
 		WebElement searchButton = driver.findElement(By.tagName("button"));
 		searchButton.submit();
 		
+		//1st Version
+		driver.findElement(By.partialLinkText(searchTerm)).click();	
 		
-		driver.findElement(By.partialLinkText(searchTerm)).click();		
-		//driver.findElement(By.linkText(searchTerm)).click();
+		//2nd Version
+		//WebDriverWait wait = new WebDriverWait(driver, 10);
+		//WebElement friendPage = driver.findElement(By.partialLinkText(searchTerm));	
+		//wait.until(ExpectedConditions.elementToBeClickable(friendPage));
+		//friendPage.click();
 		
-		//WebElement link1 = driver.findElement(By.partialLinkText(searchTerm));		
-		//WebElement link2 = driver.findElement(By.linkText(searchTerm));
-		
-		//link1.click();
-		//link2.click();
-		
+		//3rd Version
+		//WebDriverWait wait = new WebDriverWait(driver, 10); 
+		//WebElement friendPage = wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(searchTerm)));
+		//friendPage.click();
 		
 	}
 
 	private static void OpenPhotos()  {
-		WebElement Album = driver.findElement(By.linkText("Fotos"));
-
-		Album.click();
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		
+		//1st Version
+		WebElement album = driver.findElement(By.linkText("Fotos"));
+		album.click();
 		
 		WebElement verTodos = driver.findElement(By.linkText("Ver todos"));
-		
 		verTodos.click();
 		
+		
+		//2nd Version
+		//WebElement album = driver.findElement(By.linkText("Fotos"));
+		//wait.until(ExpectedConditions.elementToBeClickable(album));
+		//album.click();
+		
+		//WebElement verTodos = driver.findElement(By.linkText("Ver todos"));
+		//wait.until(ExpectedConditions.elementToBeClickable(verTodos));
+		//verTodos.click();		
 	}
 
 	private static void SelectAlbum(Integer albumNumber) {
-//		List <WebElement> albumsList = driver.findElements(By.className("_3rte"));
-//		
-//		Integer counter = 1;
-//		WebElement correctAlbum = null;
-//		
-//		for(WebElement currentAlbum: albumsList) {
-//			if(counter == albumNumber) {
-//				correctAlbum = currentAlbum;
-//				break;
-//			}
-//			counter++;
-//		}
-//		
-//		String albumName = correctAlbum.getText();
-		
-		
 		List <WebElement> albumList = driver.findElements(By.xpath("//*[@class='_3rte']/a"));
 		
 		Integer counter = 1;
@@ -121,6 +120,6 @@ public class FacebookStalker {
 	private static void LikePhotos() {
 		List <WebElement> picturesList1 = driver.findElements(By.partialLinkText("Me Gusta"));
 		List <WebElement> picturesList = driver.findElements(By.linkText("Me Gusta"));
-		List <WebElement> totalColCount = driver.findElements(By.xpath("//*[@class='_4crj']/a"));
+		List <WebElement> totalCount = driver.findElements(By.xpath("//*[@class='_4crj']/a"));
 	}
 }
