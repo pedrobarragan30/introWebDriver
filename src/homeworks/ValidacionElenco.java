@@ -118,6 +118,5 @@ public class ValidacionElenco {
 		       }
 		      rowCounter = rowCounter + 1;
 		 }	
-		System.out.println("test");
 	}
 }
