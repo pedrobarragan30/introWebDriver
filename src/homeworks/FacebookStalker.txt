@@ -1,0 +1,9 @@
+Para hacer jalar esto puse breakpoints en las lineas:
+
+68
+88
+91
+108
+123
+
+y hacer el corrido de paso a paso
