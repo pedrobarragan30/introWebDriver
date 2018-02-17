@@ -37,8 +37,8 @@ public class FacebookStalker {
 	}
 
 	private static void Login() {
-		String user = "pbaro30@hotmail.com";
-		String pswd = "HIPh17h0044a!";
+		String user = "";
+		String pswd = "";
 		
 		WebElement userField = driver.findElement(By.id("email"));
 		WebElement pswdField = driver.findElement(By.id("pass"));
@@ -122,18 +122,5 @@ public class FacebookStalker {
 		List <WebElement> picturesList1 = driver.findElements(By.partialLinkText("Me Gusta"));
 		List <WebElement> picturesList = driver.findElements(By.linkText("Me Gusta"));
 		List <WebElement> totalColCount = driver.findElements(By.xpath("//*[@class='_4crj']/a"));
-		//Integer counter = 1;
-		WebElement correctAlbum = null;
-
-//		for(WebElement currentAlbum: albumList) {
-//			if(counter == (albumNumber * 2)) {
-//				correctAlbum = currentAlbum;
-//				break;
-//				}
-//			counter++;
-//			System.out.println("");
-//			}		
-//		correctAlbum.click();
-		
 	}
 }
