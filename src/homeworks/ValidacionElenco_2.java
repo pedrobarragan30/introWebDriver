@@ -13,7 +13,6 @@ public class ValidacionElenco_2 {
 	static WebDriver driver;
 
 	public static void main(String[] args) {
-
 		SetUp("http://www.imdb.com/");
 
 		SearchMovie("Lord of the Rings");

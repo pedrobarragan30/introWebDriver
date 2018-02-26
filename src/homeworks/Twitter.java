@@ -53,8 +53,7 @@ public class Twitter {
 		rememberMe.clear();
 		
 		userField.sendKeys(user);
-		pswdField.sendKeys(pswd);
-		
+		pswdField.sendKeys(pswd);		
 	}
 
 	private static void Tweet() {

@@ -30,14 +30,11 @@ public class Multibrowser {
 			System.setProperty("webdriver.gecko.driver", "C:\\test_automation\\drivers\\geckodriver.exe");
 			
 			driver =  new FirefoxDriver();
-			break;
-			
-		
+			break;		
 		}
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		driver.get(urlToOpen);
-		
 	}
 }

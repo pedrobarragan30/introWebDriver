@@ -27,8 +27,6 @@ public class WordReference {
 		WRreverse();
 		
 		SeeAlso(5);
-		
-
 	}
 
 	private static void SetUp(String urlToOpen) {
