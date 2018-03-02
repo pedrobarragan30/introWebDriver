@@ -26,6 +26,8 @@ public class ValidacionElenco {
 		ClickLink("See full cast");
 
 		VerifyRoles();
+		
+		TearDown();
 	}
 
 	private static void SetUp(String urlToOpen) {
@@ -118,5 +120,14 @@ public class ValidacionElenco {
 		       }
 		      rowCounter = rowCounter + 1;
 		 }	
+	}
+	
+	private static void TearDown() {
+		driver.close(); // closes the browser window which is currently in focus.
+		//if there are many windows, only will close the current and the rest will remain open
+
+		driver.quit(); //calls the driver.dispose method, which closes all the browser windows and terminates the WebDriver session.
+		//If we do not use quit() at the end of program, the WebDriver session will not be closed properly and the files will not be cleared off memory.
+		//This may result in memory leak errors.	
 	}
 }

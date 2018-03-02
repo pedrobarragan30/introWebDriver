@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FacebookStalker {
 	static WebDriver driver;
+	static WebDriverWait wait;
 	
 	public static void main(String[] args) {
 
@@ -34,13 +35,14 @@ public class FacebookStalker {
 		driver = new ChromeDriver();
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver, 15);
 
 		driver.get(urlToOpen);
 	}
 
 	private static void Login() {
-		String user = "pbaro30@hotmail.com";
-		String pswd = "HIPh17h0044a!";
+		String user = "";
+		String pswd = "";
 		
 		WebElement userField = driver.findElement(By.id("email"));
 		WebElement pswdField = driver.findElement(By.id("pass"));
@@ -63,7 +65,7 @@ public class FacebookStalker {
 		
 		WebElement searchButton = driver.findElement(By.tagName("button"));
 		searchButton.submit();
-		
+
 		//1st Version
 		driver.findElement(By.partialLinkText(searchTerm)).click();	
 		

@@ -47,6 +47,8 @@ public class ManagingSelects {
 		if (str.equalsIgnoreCase("true"))
 		{
 		    System.out.println("Checkbox selected");
-		}		
+		}
+		
+		driver.quit();
 	}
 }

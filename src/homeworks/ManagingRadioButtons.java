@@ -41,6 +41,6 @@ public class ManagingRadioButtons {
 		
 		//Both of them are useful to close the browser
 		//driver.close();
-		//driver.quit();
+		driver.quit();
 	}
 }

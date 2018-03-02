@@ -71,7 +71,7 @@ public class CheckBxRadioBtn {
 		oCheckBox.click();
 		
 		// Kill the browser
-		//driver.quit();
+		driver.quit();
  
 	}
  

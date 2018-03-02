@@ -37,5 +37,7 @@ public class ManagingSelects2 {
 		scSelect.deselectByVisibleText("Switch Commands");
 		
 		scSelect.deselectAll();
+		
+		driver.quit();
 	}
 }
