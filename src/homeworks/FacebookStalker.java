@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,12 +28,19 @@ public class FacebookStalker {
 		SelectAlbum(1);
 
 		LikePhotos();
+		
+		
 	}
 
 	private static void SetUp(String urlToOpen) {
 		System.setProperty("webdriver.chrome.driver", "C:\\test_automation\\drivers\\chromedriver.exe");
 
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("disable-infobars");
+		//options.addArguments("--start-maximized");
+		options.addArguments("-disable-notifications");
+
+		driver = new ChromeDriver(options);
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver, 15);
@@ -41,17 +49,14 @@ public class FacebookStalker {
 	}
 
 	private static void Login() {
-		String user = "";
-		String pswd = "";
-		
 		WebElement userField = driver.findElement(By.id("email"));
 		WebElement pswdField = driver.findElement(By.id("pass"));
 		
 		userField.clear();
-		userField.sendKeys(user);
+		userField.sendKeys(Properties.userFB);
 		
 		pswdField.clear();
-		pswdField.sendKeys(pswd);
+		pswdField.sendKeys(Properties.pwdFB);
 		
 		WebElement Login = driver.findElement(By.id("loginbutton"));
 		Login.submit();
@@ -86,42 +91,59 @@ public class FacebookStalker {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		
 		//1st Version
-		WebElement album = driver.findElement(By.linkText("Fotos"));
-		album.click();
-		
-		WebElement verTodos = driver.findElement(By.linkText("Ver todos"));
-		verTodos.click();
-		
-		
-		//2nd Version
 		//WebElement album = driver.findElement(By.linkText("Fotos"));
-		//wait.until(ExpectedConditions.elementToBeClickable(album));
 		//album.click();
 		
 		//WebElement verTodos = driver.findElement(By.linkText("Ver todos"));
-		//wait.until(ExpectedConditions.elementToBeClickable(verTodos));
-		//verTodos.click();		
+		//verTodos.click();
+		
+		
+		//2nd Version
+		WebElement photosLink = driver.findElement(By.xpath("//*[@data-key='tab_photos']"));
+		wait.until(ExpectedConditions.elementToBeClickable(photosLink));
+		photosLink.click();
+		
+		WebElement verTodos = driver.findElement(By.linkText("Ver todos"));
+		wait.until(ExpectedConditions.elementToBeClickable(verTodos));
+		verTodos.click();		
 	}
 
 	private static void SelectAlbum(Integer albumNumber) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		//WebElement albumText = driver.findElement(By.xpath("//div[contains(text(),'Todos los álbumes')]"));
+		//By byXpath = By.xpath("//div[contains(text(),'Todos los álbumes')]"); 
+		//WebElement myDynamicElement = (new WebDriverWait(driver, 10))
+		//  .until(ExpectedConditions.presenceOfElementLocated(byXpath));
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Todos los álbumes')]")));
+		
 		List <WebElement> albumList = driver.findElements(By.xpath("//*[@class='_3rte']/a"));
 		
 		Integer counter = 1;
 		WebElement correctAlbum = null;
-
-		for(WebElement currentAlbum: albumList) {
-			if(counter == (albumNumber * 2)) {
+		
+		if((albumNumber*2) <= albumList.size()) {
+			for(WebElement currentAlbum: albumList) {
+				if(counter == (albumNumber * 2)) {
 				correctAlbum = currentAlbum;
 				break;
 				}
-			counter++;
-			}		
-		correctAlbum.click();
+				counter++;
+			}
+			wait.until(ExpectedConditions.elementToBeClickable(correctAlbum)).click();
+		}
+		else
+			System.out.println("Album elegido inexistente, el total de albumes es "+ albumList.size());
 	}
 
 	private static void LikePhotos() {
 		List <WebElement> picturesList1 = driver.findElements(By.partialLinkText("Me Gusta"));
 		List <WebElement> picturesList = driver.findElements(By.linkText("Me Gusta"));
 		List <WebElement> totalCount = driver.findElements(By.xpath("//*[@class='_4crj']/a"));
+		List <WebElement> totalPicturesToLike = driver.findElements(By.xpath("//*[@class='_4crj']/a[contains(.,\"Me gusta\")]"));
+		
+		System.out.println(picturesList1.size());
+		System.out.println(picturesList.size());
+		System.out.println(totalCount.size());
+		System.out.println(totalPicturesToLike.size());
 	}
 }
